@@ -1,5 +1,9 @@
 # strobe_light
 
+### Flow chart
+
+![alt text](Sigint.py)
+
 ### Run
 - Clone repository and cd into it
 
