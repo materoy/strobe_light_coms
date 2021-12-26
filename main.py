@@ -3,6 +3,7 @@ import numpy
 import time
 import iir_filter
 from scipy import signal
+import math
 
 # This program detects and measures the frequency of strobe lights 
 
@@ -16,10 +17,20 @@ time_now = time.time()
 
 strobe_count = 0
 
-# while not first_frame:
-while True:
+# Sampling time in seconds
+sampling_time: int = 10
+start_sampling_time = time.time()
+
+# Collects samples for [start_sampling_time] amount of time
+while time.time() - start_sampling_time < sampling_time:
     # Capture video frame by frame 
     ret, frame = capture.read()
+    
+    frame_time = time.time() - time_now
+
+    # Sampling frequency 1 / T
+    sampling_frequency = int(1 / frame_time) 
+    time_now = time.time()
 
     # Unfiltered frame output
     cv2.imshow("Unfiltered output", frame)
